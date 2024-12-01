@@ -1,13 +1,15 @@
-# **Alphoresis v0.1.3**
+# **Alphoresis**  _(p-r/0.1.4)_
    
 
 ## ❱ **General**
 
-Simple no-graphics game using Python 3.1.1 terminal, based on Star Wars theme
+Simple no-graphics game, based on Star Wars theme
 
 Game type: Turn-based strategy/Wargame
 
 Supported languages: 🇫🇷-Fr
+
+Made with Python 3.1.1
 
 ## ❱ **How to download & play**
 
