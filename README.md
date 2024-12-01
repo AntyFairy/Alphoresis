@@ -9,13 +9,7 @@ Game type: Turn-based strategy/Wargame
 
 Supported languages: 🇫🇷-Fr
 
+
+## ❱ **Python librairies used**
+
 Using [Random](https://docs.python.org/3/library/random.html) and [Math](https://docs.python.org/3/library/math.html) librairies
-
-
-## ❱ **System Requirements**
-
-|| Minimum | Recommended |
-|---|----:|----:|
-|RAM | 10 MB | 250 MB |
-|Graphics | ✕ | ✕ |
-|Storage Free | 10 MB | 50 MB |
