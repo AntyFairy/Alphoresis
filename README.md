@@ -3,13 +3,13 @@
 
 ## ❱ **General**
 
-Simple no-graphics game, based on Star Wars theme
+- Alphoresis is a simple no-graphics game, based on Star Wars theme.
 
-Game type: Turn-based strategy/Wargame
+- Game type: Turn-based strategy/Wargame
 
-Supported languages: 🇫🇷-Fr
+- Supported languages: 🇫🇷-Fr (🇬🇧/🇺🇸-En will be added soon)
 
-Made with Python 3.1.1
+- Made with Python 3.1.1
 
 ## ❱ **How to download & play**
 
