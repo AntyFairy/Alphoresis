@@ -1205,11 +1205,11 @@ try:
                 #choix des unités
                 print("Choix des 3 unités :")
                 print(" ")
-                print("[1] Luke Skywalker | HP: 60 | Stamina: 4 | Portée: Corps-à-corps | Capacité spéciale: Brûlure de sabre laser (passif)")
+                print("[1] Luke Skywalker | HP: 60 | Stamina: 4 | Portée: Corps-à-corps")
                 print("[2] Princesse Leia | HP: 40 | Stamina: 4 | Portée: à distance")
                 print("[3] Han Solo       | HP: 60 | Stamina: 3 | Portée: à distance")
-                print("[4] Chewbacca      | HP: 60 | Stamina: 2 | Portée: à distance | Capacité spéciale: Cri (passif)")
-                print("[5] Dark Vador     | HP: 60 | Stamina: 4 | Portée: Corps-à-corps | Capacité spéciale: Brûlure de sabre laser (passif)")
+                print("[4] Chewbacca      | HP: 60 | Stamina: 2 | Portée: à distance")
+                print("[5] Dark Vador     | HP: 60 | Stamina: 4 | Portée: Corps-à-corps")
                 print("[6] Stormtroopers  | HP: 40 | Stamina: 4 | Portée: à distance")
                 print("[7] Snowtroopers   | HP: 60 | Stamina: 3 | Portée: à distance")
                 print("[8] Boba Fett      | HP: 60 | Stamina: 2 | Portée: à distance")
@@ -1291,11 +1291,11 @@ try:
                         print("Vous avez choisi : Boba Fett!")
 
                 hp_rancor=110
-                x_rancor=4
-                y_rancor=4
+                x_rancor=5
+                y_rancor=5
                 RancorSuperAttackCooldown=3
                 DistanceUnitBossLaPlusFaible=100
-                UnitPlusProcheDuBoss=False
+                UnitPlusProcheDuBoss=1
 
                 #début tour de jeu
                 while en_jeu==True:
@@ -1695,6 +1695,639 @@ try:
                             if reponse_action==4:
                                 stamina_luke=0
 
+                    if reponse_unite_choisie==2 and hp_leia>0:
+                        stamina_leia=4
+                        while stamina_leia>0:
+
+                            print("-> Princesse Leia | Stamina : ", stamina_leia, " | Voulez vous :")
+                            if hp_leia<40:
+                                print("[1] Soin (10 HP)")
+                            if calcul_distance(x_rancor, y_rancor, x_leia, y_leia)<=4:
+                                    
+                                print("[2] Attaquer le boss")
+                            print("[3] Déplacement")
+                            print("[4] Passer le tour")
+                            print(" ")
+
+                            reponse_action=int(input("-> "))
+
+                        #SOIN: OK
+
+                            if reponse_action==1 and hp_leia<=39:
+                                if hp_leia>29:
+                                    hp_leia=40
+                                else:
+                                    hp_leia=hp_leia+10
+                                print(" ")
+                                print("Princesse Leia a désormais ", end="")
+                                print(hp_leia, end="")
+                                print(" HP.")
+                                stamina_leia=0
+
+                        #ATTAQUE:
+
+                            if reponse_action==2 and calcul_distance(x_rancor, y_rancor, x_leia, y_leia)<=4:
+                                print(" ")
+                                puissance_attaque=range(1, 11)
+                                hp_rancor=hp_rancor-choice(puissance_attaque)
+                                print("Le boss a bien été attaqué ! HP restants : ", hp_rancor)
+                                stamina_leia=0
+                                
+                        
+                        #DÉPLACEMENT: OK
+
+                            if reponse_action==3:
+                                print(" ")
+                                print("Déplacement (3 cases par stamina)")
+                                print(" ")
+                                x_deplacement_voulu=int(input("Indiquer la coordonnée X choisie -> "))
+                                y_deplacement_voulu=int(input("Indiquer la coordonnée Y choisie -> "))
+                                print(" ")
+                                distance_entre_voulue_et_actuelle=calcul_distance(x_leia, y_leia, x_deplacement_voulu, y_deplacement_voulu)
+                                if  distance_entre_voulue_et_actuelle <= 3*stamina_leia:
+                                    if distance_entre_voulue_et_actuelle <=3 and distance_entre_voulue_et_actuelle > 0:
+                                        x_leia=x_deplacement_voulu
+                                        y_leia=y_deplacement_voulu
+                                        stamina_leia=stamina_leia - 1
+                                    if distance_entre_voulue_et_actuelle <=6 and distance_entre_voulue_et_actuelle > 3:
+                                        x_leia=x_deplacement_voulu
+                                        y_leia=y_deplacement_voulu
+                                        stamina_leia=stamina_leia - 2
+                                    if distance_entre_voulue_et_actuelle <=9 and distance_entre_voulue_et_actuelle > 6:
+                                        x_leia=x_deplacement_voulu
+                                        y_leia=y_deplacement_voulu
+                                        stamina_leia=stamina_leia - 3
+                                    if distance_entre_voulue_et_actuelle <=12 and distance_entre_voulue_et_actuelle > 9:
+                                        x_leia=x_deplacement_voulu
+                                        y_leia=y_deplacement_voulu
+                                        stamina_leia=stamina_leia - 4
+                                    print("Princesse Leia est désormais en X=", end=" ")
+                                    print(x_leia)
+                                    print(", Y=", end=" ")
+                                    print(y_leia)
+                                else:
+                                    print(" ")
+                                    print("Il y a eu un problème. La distance est probablement trop élevée pour le stamina restant de cette unité.")
+
+
+                        #PASSER LE TOUR: OK
+                            if reponse_action==4:
+                                stamina_leia=0
+
+                    if reponse_unite_choisie==3 and hp_han>0:
+                        stamina_han=3
+                        while stamina_han>0:
+
+                            print("-> Han Solo | Stamina : ", stamina_han, " | Voulez vous :")
+                            if hp_han<60:
+                                print("[1] Soin (10 HP)")
+                            if calcul_distance(x_rancor, y_rancor, x_han, y_han)<=4:
+                                    
+                                print("[2] Attaquer le boss")
+                            print("[3] Déplacement")
+                            print("[4] Passer le tour")
+                            print(" ")
+
+                            reponse_action=int(input("-> "))
+
+                        #SOIN: OK
+
+                            if reponse_action==1 and hp_han<=59:
+                                if hp_han>49:
+                                    hp_han=60
+                                else:
+                                    hp_han=hp_han+10
+                                print(" ")
+                                print("Han Solo a désormais ", end="")
+                                print(hp_han, end="")
+                                print(" HP.")
+                                stamina_han=0
+
+                        #ATTAQUE:
+
+                            if reponse_action==2 and calcul_distance(x_rancor, y_rancor, x_han, y_han)<=4:
+                                print(" ")
+                                puissance_attaque=range(1, 11)
+                                hp_rancor=hp_rancor-choice(puissance_attaque)
+                                print("Le boss a bien été attaqué ! HP restants : ", hp_rancor)
+                                stamina_han=0
+                                
+                        
+                        #DÉPLACEMENT: OK
+
+                            if reponse_action==3:
+                                print(" ")
+                                print("Déplacement (3 cases par stamina)")
+                                print(" ")
+                                x_deplacement_voulu=int(input("Indiquer la coordonnée X choisie -> "))
+                                y_deplacement_voulu=int(input("Indiquer la coordonnée Y choisie -> "))
+                                print(" ")
+                                distance_entre_voulue_et_actuelle=calcul_distance(x_han, y_han, x_deplacement_voulu, y_deplacement_voulu)
+                                if  distance_entre_voulue_et_actuelle <= 3*stamina_han:
+                                    if distance_entre_voulue_et_actuelle <=3 and distance_entre_voulue_et_actuelle > 0:
+                                        x_han=x_deplacement_voulu
+                                        y_han=y_deplacement_voulu
+                                        stamina_han=stamina_han - 1
+                                    if distance_entre_voulue_et_actuelle <=6 and distance_entre_voulue_et_actuelle > 3:
+                                        x_han=x_deplacement_voulu
+                                        y_han=y_deplacement_voulu
+                                        stamina_han=stamina_han - 2
+                                    if distance_entre_voulue_et_actuelle <=9 and distance_entre_voulue_et_actuelle > 6:
+                                        x_han=x_deplacement_voulu
+                                        y_han=y_deplacement_voulu
+                                        stamina_han=stamina_han - 3
+                                    if distance_entre_voulue_et_actuelle <=12 and distance_entre_voulue_et_actuelle > 9:
+                                        x_han=x_deplacement_voulu
+                                        y_han=y_deplacement_voulu
+                                        stamina_han=stamina_han - 4
+                                    print("Han Solo est désormais en X=", end=" ")
+                                    print(x_han)
+                                    print(", Y=", end=" ")
+                                    print(y_han)
+                                else:
+                                    print(" ")
+                                    print("Il y a eu un problème. La distance est probablement trop élevée pour le stamina restant de cette unité.")
+
+
+                        #PASSER LE TOUR: OK
+                            if reponse_action==4:
+                                stamina_han=0
+
+                    if reponse_unite_choisie==4 and hp_chew>0:
+
+                        stamina_chew=2
+                        while stamina_chew>0:
+
+                            print("-> Chewbacca | Stamina : ", stamina_chew, " | Voulez vous :")
+                            if hp_chew<60:
+                                print("[1] Soin (10 HP)")
+                            if calcul_distance(x_rancor, y_rancor, x_chew, y_chew)<=4:
+                                    
+                                print("[2] Attaquer le boss")
+                            print("[3] Déplacement")
+                            print("[4] Passer le tour")
+                            print(" ")
+
+                            reponse_action=int(input("-> "))
+
+                        #SOIN: OK
+
+                            if reponse_action==1 and hp_chew<=59:
+                                if hp_chew>49:
+                                    hp_chew=60
+                                else:
+                                    hp_chew=hp_chew+10
+                                print(" ")
+                                print("Chewbacca a désormais ", end="")
+                                print(hp_chew, end="")
+                                print(" HP.")
+                                stamina_chew=0
+
+                        #ATTAQUE:
+
+                            if reponse_action==2 and calcul_distance(x_rancor, y_rancor, x_chew, y_chew)<=4:
+                                print(" ")
+                                puissance_attaque=range(1, 11)
+                                hp_rancor=hp_rancor-choice(puissance_attaque)
+                                print("Le boss a bien été attaqué ! HP restants : ", hp_rancor)
+                                stamina_chew=0
+                                
+                        
+                        #DÉPLACEMENT: OK
+
+                            if reponse_action==3:
+                                print(" ")
+                                print("Déplacement (3 cases par stamina)")
+                                print(" ")
+                                x_deplacement_voulu=int(input("Indiquer la coordonnée X choisie -> "))
+                                y_deplacement_voulu=int(input("Indiquer la coordonnée Y choisie -> "))
+                                print(" ")
+                                distance_entre_voulue_et_actuelle=calcul_distance(x_chew, y_chew, x_deplacement_voulu, y_deplacement_voulu)
+                                if  distance_entre_voulue_et_actuelle <= 3*stamina_chew:
+                                    if distance_entre_voulue_et_actuelle <=3 and distance_entre_voulue_et_actuelle > 0:
+                                        x_chew=x_deplacement_voulu
+                                        y_chew=y_deplacement_voulu
+                                        stamina_chew=stamina_chew - 1
+                                    if distance_entre_voulue_et_actuelle <=6 and distance_entre_voulue_et_actuelle > 3:
+                                        x_chew=x_deplacement_voulu
+                                        y_chew=y_deplacement_voulu
+                                        stamina_chew=stamina_chew - 2
+                                    if distance_entre_voulue_et_actuelle <=9 and distance_entre_voulue_et_actuelle > 6:
+                                        x_chew=x_deplacement_voulu
+                                        y_chew=y_deplacement_voulu
+                                        stamina_chew=stamina_chew - 3
+                                    if distance_entre_voulue_et_actuelle <=12 and distance_entre_voulue_et_actuelle > 9:
+                                        x_chew=x_deplacement_voulu
+                                        y_chew=y_deplacement_voulu
+                                        stamina_chew=stamina_chew - 4
+                                    print("Chewbacca est désormais en X=", end=" ")
+                                    print(x_chew)
+                                    print(", Y=", end=" ")
+                                    print(y_chew)
+                                else:
+                                    print(" ")
+                                    print("Il y a eu un problème. La distance est probablement trop élevée pour le stamina restant de cette unité.")
+
+
+                        #PASSER LE TOUR: OK
+                            if reponse_action==4:
+                                stamina_chew=0
+
+                    if reponse_unite_choisie==5 and hp_vador>0:
+                        stamina_vador=4
+                        while stamina_vador>0:
+
+                            print("-> Dark Vador | Stamina : ", stamina_vador, " | Voulez vous :")
+                            if hp_vador<60:
+                                print("[1] Soin (10 HP)")
+                            if calcul_distance(x_rancor, y_rancor, x_vador, y_vador)<=2:
+                                    
+                                print("[2] Attaquer le boss")
+                            print("[3] Déplacement")
+                            print("[4] Passer le tour")
+                            print(" ")
+
+                            reponse_action=int(input("-> "))
+
+                        #SOIN: OK
+
+                            if reponse_action==1 and hp_vador<=59:
+                                if hp_vador>49:
+                                    hp_vador=60
+                                else:
+                                    hp_vador=hp_vador+10
+                                print(" ")
+                                print("Dark Vador a désormais ", end="")
+                                print(hp_vador, end="")
+                                print(" HP.")
+                                stamina_vador=0
+
+                        #ATTAQUE:
+
+                            if reponse_action==2 and calcul_distance(x_rancor, y_rancor, x_vador, y_vador)<=2:
+                                print(" ")
+                                puissance_attaque=range(1, 11)
+                                hp_rancor=hp_rancor-choice(puissance_attaque)
+                                print("Le boss a bien été attaqué ! HP restants : ", hp_rancor)
+                                stamina_vador=0
+                                
+                        
+                        #DÉPLACEMENT: OK
+
+                            if reponse_action==3:
+                                print(" ")
+                                print("Déplacement (3 cases par stamina)")
+                                print(" ")
+                                x_deplacement_voulu=int(input("Indiquer la coordonnée X choisie -> "))
+                                y_deplacement_voulu=int(input("Indiquer la coordonnée Y choisie -> "))
+                                print(" ")
+                                distance_entre_voulue_et_actuelle=calcul_distance(x_vador, y_vador, x_deplacement_voulu, y_deplacement_voulu)
+                                if  distance_entre_voulue_et_actuelle <= 3*stamina_vador:
+                                    if distance_entre_voulue_et_actuelle <=3 and distance_entre_voulue_et_actuelle > 0:
+                                        x_vador=x_deplacement_voulu
+                                        y_vador=y_deplacement_voulu
+                                        stamina_vador=stamina_vador - 1
+                                    if distance_entre_voulue_et_actuelle <=6 and distance_entre_voulue_et_actuelle > 3:
+                                        x_vador=x_deplacement_voulu
+                                        y_vador=y_deplacement_voulu
+                                        stamina_vador=stamina_vador - 2
+                                    if distance_entre_voulue_et_actuelle <=9 and distance_entre_voulue_et_actuelle > 6:
+                                        x_vador=x_deplacement_voulu
+                                        y_vador=y_deplacement_voulu
+                                        stamina_vador=stamina_vador - 3
+                                    if distance_entre_voulue_et_actuelle <=12 and distance_entre_voulue_et_actuelle > 9:
+                                        x_vador=x_deplacement_voulu
+                                        y_vador=y_deplacement_voulu
+                                        stamina_vador=stamina_vador - 4
+                                    print("Dark Vador est désormais en X=", end=" ")
+                                    print(x_vador)
+                                    print(", Y=", end=" ")
+                                    print(y_vador)
+                                else:
+                                    print(" ")
+                                    print("Il y a eu un problème. La distance est probablement trop élevée pour le stamina restant de cette unité.")
+
+
+                        #PASSER LE TOUR: OK
+                            if reponse_action==4:
+                                stamina_vador=0
+
+                    if reponse_unite_choisie==6 and hp_storm>0:
+                        stamina_storm=4
+                        while stamina_storm>0:
+
+                            print("-> Stormtroopers | Stamina : ", stamina_storm, " | Voulez vous :")
+                            if hp_storm<40:
+                                print("[1] Soin (10 HP)")
+                            if calcul_distance(x_rancor, y_rancor, x_storm, y_storm)<=4:
+                                    
+                                print("[2] Attaquer le boss")
+                            print("[3] Déplacement")
+                            print("[4] Passer le tour")
+                            print(" ")
+
+                            reponse_action=int(input("-> "))
+
+                        #SOIN: OK
+
+                            if reponse_action==1 and hp_storm<=39:
+                                if hp_storm>29:
+                                    hp_storm=40
+                                else:
+                                    hp_storm=hp_storm+10
+                                print(" ")
+                                print("Stormtroopers a désormais ", end="")
+                                print(hp_storm, end="")
+                                print(" HP.")
+                                stamina_storm=0
+
+                        #ATTAQUE:
+
+                            if reponse_action==2 and calcul_distance(x_rancor, y_rancor, x_storm, y_storm)<=4:
+                                print(" ")
+                                puissance_attaque=range(1, 11)
+                                hp_rancor=hp_rancor-choice(puissance_attaque)
+                                print("Le boss a bien été attaqué ! HP restants : ", hp_rancor)
+                                stamina_storm=0
+                                
+                        
+                        #DÉPLACEMENT: OK
+
+                            if reponse_action==3:
+                                print(" ")
+                                print("Déplacement (3 cases par stamina)")
+                                print(" ")
+                                x_deplacement_voulu=int(input("Indiquer la coordonnée X choisie -> "))
+                                y_deplacement_voulu=int(input("Indiquer la coordonnée Y choisie -> "))
+                                print(" ")
+                                distance_entre_voulue_et_actuelle=calcul_distance(x_storm, y_storm, x_deplacement_voulu, y_deplacement_voulu)
+                                if  distance_entre_voulue_et_actuelle <= 3*stamina_storm:
+                                    if distance_entre_voulue_et_actuelle <=3 and distance_entre_voulue_et_actuelle > 0:
+                                        x_storm=x_deplacement_voulu
+                                        y_storm=y_deplacement_voulu
+                                        stamina_storm=stamina_storm - 1
+                                    if distance_entre_voulue_et_actuelle <=6 and distance_entre_voulue_et_actuelle > 3:
+                                        x_storm=x_deplacement_voulu
+                                        y_storm=y_deplacement_voulu
+                                        stamina_storm=stamina_storm - 2
+                                    if distance_entre_voulue_et_actuelle <=9 and distance_entre_voulue_et_actuelle > 6:
+                                        x_storm=x_deplacement_voulu
+                                        y_storm=y_deplacement_voulu
+                                        stamina_storm=stamina_storm - 3
+                                    if distance_entre_voulue_et_actuelle <=12 and distance_entre_voulue_et_actuelle > 9:
+                                        x_storm=x_deplacement_voulu
+                                        y_storm=y_deplacement_voulu
+                                        stamina_storm=stamina_storm - 4
+                                    print("Stormtroopers est désormais en X=", end=" ")
+                                    print(x_storm)
+                                    print(", Y=", end=" ")
+                                    print(y_storm)
+                                else:
+                                    print(" ")
+                                    print("Il y a eu un problème. La distance est probablement trop élevée pour le stamina restant de cette unité.")
+
+
+                        #PASSER LE TOUR: OK
+                            if reponse_action==4:
+                                stamina_storm=0
+
+
+                        stamina_storm=3
+                        while stamina_storm>0:
+
+                            print("-> Stormtroopers | Stamina : ", stamina_storm, " | Voulez vous :")
+                            if hp_storm<60:
+                                print("[1] Soin (10 HP)")
+                            if calcul_distance(x_rancor, y_rancor, x_storm, y_storm)<=4:
+                                    
+                                print("[2] Attaquer le boss")
+                            print("[3] Déplacement")
+                            print("[4] Passer le tour")
+                            print(" ")
+
+                            reponse_action=int(input("-> "))
+
+                        #SOIN: OK
+
+                            if reponse_action==1 and hp_storm<=59:
+                                if hp_storm>49:
+                                    hp_storm=60
+                                else:
+                                    hp_storm=hp_storm+10
+                                print(" ")
+                                print("Stormtroopers a désormais ", end="")
+                                print(hp_storm, end="")
+                                print(" HP.")
+                                stamina_storm=0
+
+                        #ATTAQUE:
+
+                            if reponse_action==2 and calcul_distance(x_rancor, y_rancor, x_storm, y_storm)<=4:
+                                print(" ")
+                                puissance_attaque=range(1, 11)
+                                hp_rancor=hp_rancor-choice(puissance_attaque)
+                                print("Le boss a bien été attaqué ! HP restants : ", hp_rancor)
+                                stamina_storm=0
+                                
+                        
+                        #DÉPLACEMENT: OK
+
+                            if reponse_action==3:
+                                print(" ")
+                                print("Déplacement (3 cases par stamina)")
+                                print(" ")
+                                x_deplacement_voulu=int(input("Indiquer la coordonnée X choisie -> "))
+                                y_deplacement_voulu=int(input("Indiquer la coordonnée Y choisie -> "))
+                                print(" ")
+                                distance_entre_voulue_et_actuelle=calcul_distance(x_storm, y_storm, x_deplacement_voulu, y_deplacement_voulu)
+                                if  distance_entre_voulue_et_actuelle <= 3*stamina_storm:
+                                    if distance_entre_voulue_et_actuelle <=3 and distance_entre_voulue_et_actuelle > 0:
+                                        x_storm=x_deplacement_voulu
+                                        y_storm=y_deplacement_voulu
+                                        stamina_storm=stamina_storm - 1
+                                    if distance_entre_voulue_et_actuelle <=6 and distance_entre_voulue_et_actuelle > 3:
+                                        x_storm=x_deplacement_voulu
+                                        y_storm=y_deplacement_voulu
+                                        stamina_storm=stamina_storm - 2
+                                    if distance_entre_voulue_et_actuelle <=9 and distance_entre_voulue_et_actuelle > 6:
+                                        x_storm=x_deplacement_voulu
+                                        y_storm=y_deplacement_voulu
+                                        stamina_storm=stamina_storm - 3
+                                    if distance_entre_voulue_et_actuelle <=12 and distance_entre_voulue_et_actuelle > 9:
+                                        x_storm=x_deplacement_voulu
+                                        y_storm=y_deplacement_voulu
+                                        stamina_storm=stamina_storm - 4
+                                    print("Stormtroopers est désormais en X=", end=" ")
+                                    print(x_storm)
+                                    print(", Y=", end=" ")
+                                    print(y_storm)
+                                else:
+                                    print(" ")
+                                    print("Il y a eu un problème. La distance est probablement trop élevée pour le stamina restant de cette unité.")
+
+
+                        #PASSER LE TOUR: OK
+                            if reponse_action==4:
+                                stamina_storm=0
+
+                    if reponse_unite_choisie==7 and hp_snow>0:
+                        stamina_snow=3
+                        while stamina_snow>0:
+
+                            print("-> Snowtroopers | Stamina : ", stamina_snow, " | Voulez vous :")
+                            if hp_snow<60:
+                                print("[1] Soin (10 HP)")
+                            if calcul_distance(x_rancor, y_rancor, x_snow, y_snow)<=4:
+                                    
+                                print("[2] Attaquer le boss")
+                            print("[3] Déplacement")
+                            print("[4] Passer le tour")
+                            print(" ")
+
+                            reponse_action=int(input("-> "))
+
+                        #SOIN: OK
+
+                            if reponse_action==1 and hp_snow<=59:
+                                if hp_snow>49:
+                                    hp_snow=60
+                                else:
+                                    hp_snow=hp_snow+10
+                                print(" ")
+                                print("Snowtroopers a désormais ", end="")
+                                print(hp_snow, end="")
+                                print(" HP.")
+                                stamina_snow=0
+
+                        #ATTAQUE:
+
+                            if reponse_action==2 and calcul_distance(x_rancor, y_rancor, x_snow, y_snow)<=4:
+                                print(" ")
+                                puissance_attaque=range(1, 11)
+                                hp_rancor=hp_rancor-choice(puissance_attaque)
+                                print("Le boss a bien été attaqué ! HP restants : ", hp_rancor)
+                                stamina_snow=0
+                                
+                        
+                        #DÉPLACEMENT: OK
+
+                            if reponse_action==3:
+                                print(" ")
+                                print("Déplacement (3 cases par stamina)")
+                                print(" ")
+                                x_deplacement_voulu=int(input("Indiquer la coordonnée X choisie -> "))
+                                y_deplacement_voulu=int(input("Indiquer la coordonnée Y choisie -> "))
+                                print(" ")
+                                distance_entre_voulue_et_actuelle=calcul_distance(x_snow, y_snow, x_deplacement_voulu, y_deplacement_voulu)
+                                if  distance_entre_voulue_et_actuelle <= 3*stamina_snow:
+                                    if distance_entre_voulue_et_actuelle <=3 and distance_entre_voulue_et_actuelle > 0:
+                                        x_snow=x_deplacement_voulu
+                                        y_snow=y_deplacement_voulu
+                                        stamina_snow=stamina_snow - 1
+                                    if distance_entre_voulue_et_actuelle <=6 and distance_entre_voulue_et_actuelle > 3:
+                                        x_snow=x_deplacement_voulu
+                                        y_snow=y_deplacement_voulu
+                                        stamina_snow=stamina_snow - 2
+                                    if distance_entre_voulue_et_actuelle <=9 and distance_entre_voulue_et_actuelle > 6:
+                                        x_snow=x_deplacement_voulu
+                                        y_snow=y_deplacement_voulu
+                                        stamina_snow=stamina_snow - 3
+                                    if distance_entre_voulue_et_actuelle <=12 and distance_entre_voulue_et_actuelle > 9:
+                                        x_snow=x_deplacement_voulu
+                                        y_snow=y_deplacement_voulu
+                                        stamina_snow=stamina_snow - 4
+                                    print("Snowtroopers est désormais en X=", end=" ")
+                                    print(x_snow)
+                                    print(", Y=", end=" ")
+                                    print(y_snow)
+                                else:
+                                    print(" ")
+                                    print("Il y a eu un problème. La distance est probablement trop élevée pour le stamina restant de cette unité.")
+
+
+                        #PASSER LE TOUR: OK
+                            if reponse_action==4:
+                                stamina_snow=0
+
+                    if reponse_unite_choisie==8 and hp_boba>0:
+                        stamina_boba=2
+                        while stamina_boba>0:
+
+                            print("-> Boba Fett | Stamina : ", stamina_boba, " | Voulez vous :")
+                            if hp_boba<60:
+                                print("[1] Soin (10 HP)")
+                            if calcul_distance(x_rancor, y_rancor, x_boba, y_boba)<=4:
+                                    
+                                print("[2] Attaquer le boss")
+                            print("[3] Déplacement")
+                            print("[4] Passer le tour")
+                            print(" ")
+
+                            reponse_action=int(input("-> "))
+
+                        #SOIN: OK
+
+                            if reponse_action==1 and hp_boba<=59:
+                                if hp_boba>49:
+                                    hp_boba=60
+                                else:
+                                    hp_boba=hp_boba+10
+                                print(" ")
+                                print("Boba Fett a désormais ", end="")
+                                print(hp_boba, end="")
+                                print(" HP.")
+                                stamina_boba=0
+
+                        #ATTAQUE:
+
+                            if reponse_action==2 and calcul_distance(x_rancor, y_rancor, x_boba, y_boba)<=4:
+                                print(" ")
+                                puissance_attaque=range(1, 11)
+                                hp_rancor=hp_rancor-choice(puissance_attaque)
+                                print("Le boss a bien été attaqué ! HP restants : ", hp_rancor)
+                                stamina_boba=0
+                                
+                        
+                        #DÉPLACEMENT: OK
+
+                            if reponse_action==3:
+                                print(" ")
+                                print("Déplacement (3 cases par stamina)")
+                                print(" ")
+                                x_deplacement_voulu=int(input("Indiquer la coordonnée X choisie -> "))
+                                y_deplacement_voulu=int(input("Indiquer la coordonnée Y choisie -> "))
+                                print(" ")
+                                distance_entre_voulue_et_actuelle=calcul_distance(x_boba, y_boba, x_deplacement_voulu, y_deplacement_voulu)
+                                if  distance_entre_voulue_et_actuelle <= 3*stamina_boba:
+                                    if distance_entre_voulue_et_actuelle <=3 and distance_entre_voulue_et_actuelle > 0:
+                                        x_boba=x_deplacement_voulu
+                                        y_boba=y_deplacement_voulu
+                                        stamina_boba=stamina_boba - 1
+                                    if distance_entre_voulue_et_actuelle <=6 and distance_entre_voulue_et_actuelle > 3:
+                                        x_boba=x_deplacement_voulu
+                                        y_boba=y_deplacement_voulu
+                                        stamina_boba=stamina_boba - 2
+                                    if distance_entre_voulue_et_actuelle <=9 and distance_entre_voulue_et_actuelle > 6:
+                                        x_boba=x_deplacement_voulu
+                                        y_boba=y_deplacement_voulu
+                                        stamina_boba=stamina_boba - 3
+                                    if distance_entre_voulue_et_actuelle <=12 and distance_entre_voulue_et_actuelle > 9:
+                                        x_boba=x_deplacement_voulu
+                                        y_boba=y_deplacement_voulu
+                                        stamina_boba=stamina_boba - 4
+                                    print("Boba Fett est désormais en X=", end=" ")
+                                    print(x_boba)
+                                    print(", Y=", end=" ")
+                                    print(y_boba)
+                                else:
+                                    print(" ")
+                                    print("Il y a eu un problème. La distance est probablement trop élevée pour le stamina restant de cette unité.")
+
+
+                        #PASSER LE TOUR: OK
+                            if reponse_action==4:
+                                stamina_boba=0
+
                     print(" ")
                     #rancor's attack
                     if RancorSuperAttackCooldown==0:
@@ -1796,8 +2429,8 @@ try:
             print(" ")
 
 except FileNotFoundError:
-    print("Erreur : Un ou plusieurs fichiers de sortie n'ont pas été trouvés.")
+    print("Erreur : Un ou plusieurs fichiers n'ont pas été trouvés.")
 except PermissionError:
     print("Erreur : Aucune permission d'accès au fichier. Vérifiez vos permissions.")
 except Exception as e:
-    print("Erreur ", str(e))
+    print("Erreur : ", str(e))
