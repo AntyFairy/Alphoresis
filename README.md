@@ -1,5 +1,14 @@
 # **Alphoresis**  _(p-r/0.1.5)_
-   
+
+<h3 align="center">
+  <br>
+  <img src="https://github.com/AntyFairy/Alphoresis/blob/main/logo%20alphoresis%20by%20LariVille.jpg" alt="Project logo"/>
+  <br>
+  <b>Project Alphoresis</b>
+  <br>
+  <br>
+  <b>Star Wars Strategy Game</b>
+</h3>
 
 ## ❱ **General**
 
@@ -10,6 +19,8 @@
 - Supported languages: 🇫🇷-Fr (🇬🇧/🇺🇸-En will be added soon)
 
 - Made with Python 3.1.1
+  
+- Not affiliated with Disney
 
 ## ❱ **How to download & play**
 
