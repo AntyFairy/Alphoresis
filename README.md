@@ -4,11 +4,15 @@
   <br>
   <img src="https://github.com/AntyFairy/Alphoresis/blob/main/logo%20alphoresis%20by%20LariVille.jpg" alt="Project logo"/>
   <br>
-  <b>Project Alphoresis</b>
+  <b>Project Alphoresis:</b>
   <br>
+  <b> A Star Wars Strategy Game</b>
   <br>
-  <b>Star Wars Strategy Game</b>
 </h3>
+
+<h4 align="right">
+  <b> Logo by @LariVille </b>
+</h4>
 
 ## ❱ **General**
 
