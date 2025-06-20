@@ -1290,7 +1290,7 @@ try:
                         boba_en_vie=True
                         print("Vous avez choisi : Boba Fett!")
 
-                hp_rancor=110
+                hp_rancor=40
                 x_rancor=5
                 y_rancor=5
                 RancorSuperAttackCooldown=3
