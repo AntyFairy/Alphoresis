@@ -2393,11 +2393,13 @@ try:
                         print(" ")
                         print("Retour au menu principal...")
                         print(" ")
+                        en_jeu=False
                     elif hp_luke<1 and hp_leia<1 and hp_han<1 and hp_chew<1 and hp_vador<1 and hp_storm<1 and hp_snow<1 and hp_boba<1 <1:
                         print(" ")
                         print("Défaite : toutes les unités ont été éliminées !")
                         print("Retour au menu principal...")
                         print(" ")
+                        en_jeu=False
 
         #PARAMETRES
 
@@ -2422,7 +2424,7 @@ try:
                 print("Debug mode state: ", debug_mode)
 
         if reponse==3:
-            programme==False
+            programme=False
 
         if not reponse==1 or not reponse==2 or not reponse==3:
             print(" ")
