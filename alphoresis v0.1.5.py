@@ -1303,6 +1303,7 @@ try:
                     print(" ")
                     print(" [BOSS] Jabba's Rancor | HP restants : ", hp_rancor, " | X=4 ; Y=4")
                     print(" ")
+                    DistanceUnitBossLaPlusFaible=100
                     if hp_luke>0:
                         print("~ Luke Skywalker   | HP restants : ", hp_luke, " | X=", x_luke, " ; Y=", y_luke)
                         if calcul_distance(x_rancor, y_rancor, x_luke, y_luke) < DistanceUnitBossLaPlusFaible:
@@ -1362,16 +1363,16 @@ try:
                         print("[4] Chewbacca | HP restant : ", end="")
                         print(hp_chew)
                     if hp_vador>0:
-                        print("[1] Dark Vador | HP restant : ", end="")
+                        print("[5] Dark Vador | HP restant : ", end="")
                         print(hp_vador)
                     if hp_storm>0:
-                        print("[2] Stormtroopers | HP restant : ", end="")
+                        print("[6] Stormtroopers | HP restant : ", end="")
                         print(hp_storm)
                     if hp_snow>0:
-                        print("[3] Snowtroopers | HP restant : ", end="")
+                        print("[7] Snowtroopers | HP restant : ", end="")
                         print(hp_snow)
                     if hp_boba>0:
-                        print("[4] Boba Fett | HP restant : ", end="")
+                        print("[8] Boba Fett | HP restant : ", end="")
                         print(hp_boba)
 
                     reponse_unite_choisie=int(input("-> "))
@@ -2331,7 +2332,7 @@ try:
                     print(" ")
                     #rancor's attack
                     if RancorSuperAttackCooldown==0:
-                        ("Le Rancor utilise son attaque spéciale et inflige 10 HP à toutes les unités !")
+                        print("Le Rancor utilise son attaque spéciale et inflige 10 HP à toutes les unités !")
                         print(" ")
                         RancorSuperAttackCooldown=3
                         hp_luke -=10
